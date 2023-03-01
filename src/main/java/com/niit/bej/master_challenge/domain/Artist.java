@@ -43,4 +43,12 @@ public class Artist {
     public int hashCode() {
         return Objects.hash(artistId, artistName);
     }
+
+    @Override
+    public String toString() {
+        return "Artist{" +
+                "artistId=" + artistId +
+                ", artistName='" + artistName + '\'' +
+                '}';
+    }
 }
