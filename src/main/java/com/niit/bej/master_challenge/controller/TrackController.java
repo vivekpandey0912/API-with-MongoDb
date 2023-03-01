@@ -42,6 +42,7 @@ public class TrackController {
         } catch (TrackNotFound trackNotFound) {
             throw new TrackNotFound();
         } catch (Exception exception) {
+
             return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
         }
     }
