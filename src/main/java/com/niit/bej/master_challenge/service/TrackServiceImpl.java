@@ -18,7 +18,12 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public Track addTrack(Track track) throws TrackAlreadyExist {
-        return null;
+
+        if (trackRepository.findById(track.getId()).isPresent()) {
+            throw new TrackAlreadyExist();
+        } else {
+            return trackRepository.save(track);
+        }
     }
 
     @Override
