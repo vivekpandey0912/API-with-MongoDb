@@ -36,4 +36,14 @@ public class Track {
     public int hashCode() {
         return Objects.hash(id, name, rating, artist);
     }
+
+    @Override
+    public String toString() {
+        return "Track{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", rating=" + rating +
+                ", artist=" + artist +
+                '}';
+    }
 }
