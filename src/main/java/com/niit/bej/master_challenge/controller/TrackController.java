@@ -6,10 +6,7 @@ import com.niit.bej.master_challenge.exception.TrackNotFound;
 import com.niit.bej.master_challenge.service.TrackService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -39,6 +36,18 @@ public class TrackController {
         try {
             List<Track> trackList = trackService.getAllTrack();
             return new ResponseEntity<>(trackList, HttpStatus.FOUND);
+        } catch (TrackNotFound trackNotFound) {
+            throw new TrackNotFound();
+        } catch (Exception exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
+    @DeleteMapping("/track/delete/{id}")
+    public ResponseEntity<?> deleteTrackById(@PathVariable Integer id) throws TrackNotFound {
+        try {
+            trackService.deleteTrackById(id);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
         } catch (TrackNotFound trackNotFound) {
             throw new TrackNotFound();
         } catch (Exception exception) {
