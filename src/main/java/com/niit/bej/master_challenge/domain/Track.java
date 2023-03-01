@@ -3,6 +3,8 @@ package com.niit.bej.master_challenge.domain;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Objects;
+
 @Document
 public class Track {
 
@@ -20,5 +22,18 @@ public class Track {
     }
 
     public Track() {
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Track track = (Track) o;
+        return id == track.id && rating == track.rating && Objects.equals(name, track.name) && Objects.equals(artist, track.artist);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, rating, artist);
     }
 }
