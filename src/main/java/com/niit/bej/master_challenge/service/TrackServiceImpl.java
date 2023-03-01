@@ -6,6 +6,7 @@ import com.niit.bej.master_challenge.exception.TrackNotFound;
 import com.niit.bej.master_challenge.repository.TrackRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class TrackServiceImpl implements TrackService {
 
@@ -28,11 +29,27 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public List<Track> getAllTrack() throws TrackNotFound {
-        return null;
+        List<Track> listTrack = trackRepository.findAll();
+        if (listTrack.isEmpty()) {
+            throw new TrackNotFound();
+        } else {
+            return listTrack;
+        }
+
     }
 
     @Override
     public boolean deleteTrackById(Integer id) throws TrackNotFound {
-        return false;
+
+        Optional<Track> deleteTrackById = trackRepository.findById(id);
+
+        if (deleteTrackById.isPresent()) {
+            trackRepository.deleteById(id);
+            return true;
+        } else {
+            throw new TrackNotFound();
+        }
+
+
     }
 }
