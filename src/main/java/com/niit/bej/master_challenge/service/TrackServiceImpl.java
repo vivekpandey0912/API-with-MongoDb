@@ -56,4 +56,9 @@ public class TrackServiceImpl implements TrackService {
 
 
     }
+
+    @Override
+    public List<Track> trackSearchByArtistName(String artistName) throws TrackNotFound {
+        return null
+    }
 }

@@ -14,5 +14,7 @@ public interface TrackService {
 
     boolean deleteTrackById(Integer id) throws TrackNotFound;
 
+    List<Track> trackSearchByArtistName(String artistName) throws TrackNotFound;
+
 
 }
