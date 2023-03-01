@@ -12,4 +12,13 @@ public class Track {
     private int rating;
     private Artist artist;
 
+    public Track(int id, String name, int rating, Artist artist) {
+        this.id = id;
+        this.name = name;
+        this.rating = rating;
+        this.artist = artist;
+    }
+
+    public Track() {
+    }
 }
