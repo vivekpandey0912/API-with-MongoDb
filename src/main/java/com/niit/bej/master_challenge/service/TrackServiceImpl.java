@@ -4,14 +4,18 @@ import com.niit.bej.master_challenge.domain.Track;
 import com.niit.bej.master_challenge.exception.TrackAlreadyExist;
 import com.niit.bej.master_challenge.exception.TrackNotFound;
 import com.niit.bej.master_challenge.repository.TrackRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class TrackServiceImpl implements TrackService {
 
     private final TrackRepository trackRepository;
 
+    @Autowired
     public TrackServiceImpl(TrackRepository trackRepository) {
         this.trackRepository = trackRepository;
     }
