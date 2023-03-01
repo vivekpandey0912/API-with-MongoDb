@@ -59,6 +59,11 @@ public class TrackServiceImpl implements TrackService {
 
     @Override
     public List<Track> trackSearchByArtistName(String artistName) throws TrackNotFound {
-        return null;
+        List<Track> searchedItem = trackRepository.findByTrackArtistName(artistName);
+        if (searchedItem.isEmpty()) {
+            throw new TrackNotFound();
+        } else {
+            return searchedItem;
+        }
     }
 }
