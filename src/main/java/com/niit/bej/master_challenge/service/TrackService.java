@@ -16,5 +16,7 @@ public interface TrackService {
 
     List<Track> trackSearchByArtistName(String artistName) throws TrackNotFound;
 
+    List<Track> trackRatingGreaterThanFour(Integer rating) throws TrackNotFound;
+
 
 }
