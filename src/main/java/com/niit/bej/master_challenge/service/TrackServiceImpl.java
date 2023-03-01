@@ -66,4 +66,15 @@ public class TrackServiceImpl implements TrackService {
             return searchedItem;
         }
     }
+
+    @Override
+    public List<Track> trackRatingGreaterThanFour(Integer rating) throws TrackNotFound {
+        List<Track> trackList = trackRepository.findByRatingGreaterThanEqual(rating);
+
+        if (trackList.isEmpty()) {
+            throw new TrackNotFound();
+        } else {
+            return trackList;
+        }
+    }
 }

@@ -67,5 +67,18 @@ public class TrackController {
         }
     }
 
+    @GetMapping("track/rating/{rating}")
+    public ResponseEntity<?> searchTrackRatingGreaterThanFour(@PathVariable Integer rating) throws TrackNotFound {
+        try {
+            List<Track> trackList = trackService.trackRatingGreaterThanFour(rating);
+            return new ResponseEntity<>(trackList, HttpStatus.FOUND);
+        } catch (TrackNotFound trackNotFound) {
+            throw new TrackNotFound();
+        } catch (Exception exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
+        }
+
+    }
+
 
 }

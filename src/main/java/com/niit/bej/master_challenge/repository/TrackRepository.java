@@ -12,4 +12,6 @@ public interface TrackRepository extends MongoRepository<Track, Integer> {
 
     @Query("{'artist.artistName':?0}")
     List<Track> findByTrackArtistName(String artistName);
+
+    List<Track> findByRatingGreaterThanEqual(Integer rating);
 }
