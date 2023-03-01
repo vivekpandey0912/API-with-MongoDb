@@ -55,5 +55,17 @@ public class TrackController {
         }
     }
 
+    @GetMapping("/track/{search}")
+    public ResponseEntity<?> searchTrackByArtist(@PathVariable String search) throws TrackNotFound {
+        try {
+            List<Track> searchedTracks = trackService.trackSearchByArtistName(search);
+            return new ResponseEntity<>(searchedTracks, HttpStatus.FOUND);
+        } catch (TrackNotFound trackNotFound) {
+            throw new TrackNotFound();
+        } catch (Exception exception) {
+            return new ResponseEntity<>(exception.getMessage(), HttpStatus.CONFLICT);
+        }
+    }
+
 
 }

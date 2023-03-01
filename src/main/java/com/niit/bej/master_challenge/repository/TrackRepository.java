@@ -10,6 +10,6 @@ import java.util.List;
 @Repository
 public interface TrackRepository extends MongoRepository<Track, Integer> {
 
-    @Query("{'artist.name':?0}")
+    @Query("{'artist.artistName':?0}")
     List<Track> findByTrackArtistName(String artistName);
 }
