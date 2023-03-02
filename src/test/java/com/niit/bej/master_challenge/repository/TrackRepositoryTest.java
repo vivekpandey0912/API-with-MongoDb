@@ -51,6 +51,24 @@ class TrackRepositoryTest {
     @DisplayName("Add Tracks Test")
     void AddTrack()
     {
+        trackRepository.save(track);
+        artist = new Artist(2,"Jubin");
+        track = new Track(3,"Emo",5,artist);
+        trackRepository.save(track);
+        List<Track> trackList = trackRepository.findAll();
+        assertEquals(2,trackList.size());
+    }
+    @Test
+    @DisplayName("Delete track by Id")
+    void deleteTrackById()
+    {
+        trackRepository.save(track);
+        artist = new Artist(2,"Jubin");
+        track = new Track(3,"Emo",5,artist);
+        trackRepository.save(track);
+        trackRepository.deleteById(3);
+        List<Track> trackList = trackRepository.findAll();
+        assertEquals(1,trackList.size());
 
     }
 
