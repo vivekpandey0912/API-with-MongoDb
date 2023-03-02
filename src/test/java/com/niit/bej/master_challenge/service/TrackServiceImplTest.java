@@ -13,7 +13,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+
 
 import static org.junit.jupiter.api.Assertions.*;
 //import static org.springframework.data.mongodb.core.aggregation.ConditionalOperators.Switch.CaseOperator.when;
@@ -33,12 +36,16 @@ class TrackServiceImplTest {
     Track track;
     Artist artist;
 
+    List<Track> trackList;
+
 
     @BeforeEach
     void setUp() {
 
         artist = new Artist(1,"Arijit");
         track = new Track(2,"Rom",4,artist);
+        trackList = new ArrayList<>();
+        trackList.add(track);
     }
 
     @AfterEach
@@ -72,18 +79,33 @@ class TrackServiceImplTest {
     @Test
     void getAllTrackSuccess() throws TrackNotFound
     {
-
+        when(trackRepository.findAll()).thenReturn(trackList);
+        assertEquals(1,trackServiceImpl.getAllTrack().size());
+        verify(trackRepository,times(1)).findAll();
     }
+
+    @Test
+    void getAllTrackFailure() throws TrackNotFound
+    {
+        assertThrows(TrackNotFound.class,()->trackServiceImpl.getAllTrack());
+        verify(trackRepository,times(1)).findAll();
+    }
+
 
     @Test
     void deleteTrackById() {
+
+
     }
 
     @Test
-    void trackSearchByArtistName() {
+    void trackSearchByArtistNameSuccess() throws TrackNotFound
+        {
+
+            List<Track> fetchedTracks=trackList.stream().filter(x->x.getArtist().getArtistName().equals("Arijit")).toList();
+            when(trackRepository.findByTrackArtistName("Arijit")).thenReturn(fetchedTracks);
+            assertEquals(trackServiceImpl.trackSearchByArtistName("Arijit").size(),1);
+
     }
 
-    @Test
-    void trackRatingGreaterThanFour() {
-    }
 }
