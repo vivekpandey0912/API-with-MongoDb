@@ -72,16 +72,16 @@ class TrackRepositoryTest {
 
     }
 
-
-
-
-
-
-
-
-
     @Test
+    @DisplayName("Track Search By Artist Name Test Case")
     void findByTrackArtistName() {
+        trackRepository.save(track);
+        artist = new Artist(2,"Jubin");
+        track = new Track(3,"Emo",5,artist);
+        trackRepository.save(track);
+        List<Track> trackList = trackRepository.findByTrackArtistName("Jubin");
+        assertEquals(1,trackList.size());
+
     }
 
 
