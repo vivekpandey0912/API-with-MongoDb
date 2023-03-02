@@ -58,9 +58,19 @@ class TrackServiceImplTest {
 
 
     }
+    @Test
+    void addTrackFailure() throws TrackAlreadyExist {
+
+        when(trackRepository.findById(any())).thenReturn(Optional.ofNullable(track));
+        assertThrows(TrackAlreadyExist.class,() -> trackServiceImpl.addTrack(track));
+        verify(trackRepository,times(1)).findById(any());
+        verify(trackRepository,times(0)).save(any());
+
+
+    }
 
     @Test
-    void getAllTrack() throws TrackNotFound
+    void getAllTrackSuccess() throws TrackNotFound
     {
 
     }
