@@ -81,11 +81,19 @@ class TrackRepositoryTest {
         trackRepository.save(track);
         List<Track> trackList = trackRepository.findByTrackArtistName("Jubin");
         assertEquals(1,trackList.size());
-
     }
 
 
     @Test
     void findByRatingGreaterThanEqual() {
+        trackRepository.save(track);
+        artist = new Artist(2,"Shiv");
+        track = new Track(3,"Emo",7,artist);
+        trackRepository.save(track);
+        artist = new Artist(4,"Ravi");
+        track = new Track(4,"Emo",6,artist);
+        trackRepository.save(track);
+        List<Track> trackList = trackRepository.findByRatingGreaterThanEqual(6);
+        assertEquals(2,trackList.size());
     }
 }
