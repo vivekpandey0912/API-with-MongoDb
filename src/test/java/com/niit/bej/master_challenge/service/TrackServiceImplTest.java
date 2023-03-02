@@ -107,5 +107,14 @@ class TrackServiceImplTest {
             assertEquals(trackServiceImpl.trackSearchByArtistName("Arijit").size(),1);
 
     }
+    @Test
+    void trackRatingGreaterThanFour() throws TrackNotFound {
+
+        List<Track> filterList = trackList.stream().filter(data -> data.getRating()>2).toList();
+        when(trackRepository.findByRatingGreaterThanEqual(2)).thenReturn(filterList);
+        assertEquals(1,trackServiceImpl.trackRatingGreaterThanFour(2).size());
+
+
+    }
 
 }
