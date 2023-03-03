@@ -95,7 +95,14 @@ class TrackServiceImplTest {
     void deleteTrackById() throws TrackNotFound {
         when(trackRepository.findById(any())).thenReturn(Optional.ofNullable(track));
     assertTrue(trackServiceImpl.deleteTrackById(10));
+    verify(trackRepository,times(1)).deleteById(10);
 
+    }
+    @Test
+    void deleteTrackByIdFailure() throws TrackNotFound {
+        when(trackRepository.findById(any())).then(result -> {throw new TrackNotFound();});
+        assertThrows(TrackNotFound.class,() ->trackServiceImpl.deleteTrackById(30));
+        verify(trackRepository,times(0)).deleteById(10);
     }
 
     @Test
