@@ -124,4 +124,13 @@ class TrackServiceImplTest {
 
     }
 
+    @Test
+    void trackSearchByArtistNameFailure() throws TrackNotFound
+    {
+
+        List<Track> fetchedTracks=trackList.stream().filter(x->x.getArtist().getArtistName().equals("Shiva")).toList();
+        assertThrows(TrackNotFound.class,()-> trackServiceImpl.trackSearchByArtistName("Shiva"));
+
+    }
+
 }
