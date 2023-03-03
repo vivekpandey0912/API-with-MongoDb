@@ -132,5 +132,12 @@ class TrackServiceImplTest {
         assertThrows(TrackNotFound.class,()-> trackServiceImpl.trackSearchByArtistName("Shiva"));
 
     }
+    @Test
+    void trackRatingGreaterThanFourFailure() throws TrackNotFound {
+
+        List<Track> filterList = trackList.stream().filter(data -> data.getRating()>10).toList();
+        assertThrows(TrackNotFound.class,()-> trackServiceImpl.trackRatingGreaterThanFour(10));
+
+    }
 
 }
