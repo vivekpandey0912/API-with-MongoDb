@@ -92,8 +92,9 @@ class TrackServiceImplTest {
 
 
     @Test
-    void deleteTrackById() {
-
+    void deleteTrackById() throws TrackNotFound {
+        when(trackRepository.findById(any())).thenReturn(Optional.ofNullable(track));
+    assertTrue(trackServiceImpl.deleteTrackById(10));
 
     }
 
